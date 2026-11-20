@@ -14,13 +14,18 @@
 <body>
   <main>
     <div class="hearth">
-      <div class="painting">
-        <!-- Replace the fallback src and dimensions when the final fireplace.png is ready. -->
-        <img class="room" src="images/fireplace-placeholder.webp" srcset="images/fireplace-placeholder-small.webp 540w, images/fireplace-placeholder.webp 862w" sizes="(min-aspect-ratio: 3/4) 75vh, 100vw" width="862" height="1150" alt="A Victorian Christmas fireplace with four handmade stockings, candlelight and a framed invitation to sign up for a Christmas card." fetchpriority="high">
-        <div class="fire" aria-hidden="true">
-          <img class="flame is-lit" src="images/flame-1.png" width="256" height="172" alt="">
+      <div class="card-frame">
+        <div class="painting">
+          <!-- Replace the fallback src and dimensions when the final fireplace.png is ready. -->
+          <img class="room" src="images/fireplace-placeholder.webp" srcset="images/fireplace-placeholder-small.webp 540w, images/fireplace-placeholder.webp 862w" sizes="(min-aspect-ratio: 3/4) 70vh, calc(100vw - 2rem)" width="862" height="1150" alt="A Victorian Christmas fireplace with four handmade stockings, candlelight and a framed invitation to sign up for a Christmas card." fetchpriority="high">
+          <div class="fire" aria-hidden="true">
+            <img class="flame is-lit" src="images/flame-1.png" width="256" height="172" alt="">
+          </div>
+          <button class="painting-link" type="button" aria-haspopup="dialog" aria-controls="card-dialog" aria-label="Sign up here for a Christmas card"></button>
         </div>
-        <button class="painting-link" type="button" aria-haspopup="dialog" aria-controls="card-dialog" aria-label="Sign up here for a Christmas card"></button>
+        <div class="gift-trim" aria-hidden="true">
+          <img class="bow" src="images/bow.png" width="460" height="230" alt="" decoding="async">
+        </div>
       </div>
     </div>
 

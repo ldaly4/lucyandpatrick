@@ -6,7 +6,11 @@
 
   --green: #183829;
   --red: #752a2b;
-  --paper: #fbf1de;
+  --paper: #f4ecdc;
+  --paper-light: #faf2e2;
+  --paper-deep: #eadbbe;
+  --frame-gold: #b8893a;
+  --ribbon: #8a2b2b;
   --ink: #30271d;
   --muted: #665444;
   --gold: #b08a50;
@@ -21,6 +25,7 @@
 body {
   margin: 0;
   background: var(--paper);
+  background-image: linear-gradient(#f4ecdce3, #f4ecdce3), url("images/paper-texture.png");
   color: var(--ink);
   font: 1.0625rem/1.5 var(--body);
 }
@@ -38,17 +43,71 @@ button:disabled { cursor: wait; }
 }
 
 .hearth {
+  --bow-clearance: clamp(1.65rem, min(7vw, 6svh), 4rem);
+  --bottom-gap: .7rem;
   display: grid;
   min-height: 100vh;
   min-height: 100svh;
+  padding: var(--bow-clearance) .65rem var(--bottom-gap);
   place-items: center;
-  background: #fff;
 }
 
-.painting {
+.card-frame {
   position: relative;
-  width: min(100%, 75vh);
-  width: min(100%, 75svh);
+  width: min(100%, calc((100vh - 3.5rem) * .75));
+  width: min(100%, calc((100svh - var(--bow-clearance) - var(--bottom-gap)) * .75));
+  padding: clamp(3px, .65vw, 7px);
+  border: 3px solid var(--frame-gold);
+  background: var(--paper);
+  box-shadow: 0 10px 32px #5f391932, 0 2px 5px #70481d33;
+  container-type: inline-size;
+}
+
+.painting { position: relative; }
+
+.gift-trim {
+  --ribbon-width: clamp(13px, 4.4cqw, 28px);
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gift-trim::before,
+.gift-trim::after {
+  position: absolute;
+  border-radius: 2px;
+  content: "";
+}
+
+.gift-trim::before {
+  /* The cross sits across the top frame, above the words in the painting. */
+  top: calc(var(--ribbon-width) * -.4);
+  right: -5px;
+  left: -5px;
+  height: var(--ribbon-width);
+  background: linear-gradient(to bottom, #5b191a, var(--ribbon) 16% 83%, #631c1d);
+  box-shadow: 0 2px 3px #3d191f30;
+}
+
+.gift-trim::after {
+  top: calc(var(--ribbon-width) * -.85);
+  left: 50%;
+  width: var(--ribbon-width);
+  height: calc(var(--ribbon-width) * 2.55);
+  transform: translateX(-50%);
+  background: linear-gradient(to right, #5b191a, var(--ribbon) 16% 83%, #631c1d);
+  box-shadow: 2px 0 3px #3d191f30;
+}
+
+.bow {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 50%;
+  width: clamp(4.75rem, 30%, 11rem);
+  height: auto;
+  transform: translate(-50%, -50%);
 }
 
 .painting-link {
@@ -98,12 +157,12 @@ body:has(dialog[open]) { overflow: hidden; }
   border: 5px double #94602d;
   background-color: var(--paper);
   background-image:
-    radial-gradient(ellipse at center, #fff3d5 25%, transparent 100%),
+    radial-gradient(ellipse at center, var(--paper-light) 25%, transparent 100%),
     repeating-linear-gradient(0deg, #98643416 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(90deg, #98643416 0 1px, #efdbb2 1px 4px);
+    repeating-linear-gradient(90deg, #98643416 0 1px, var(--paper-deep) 1px 4px);
   color: var(--ink);
   box-shadow: 0 12px 50px #21170b45;
-  scrollbar-color: #9f7648 #f2e1bc;
+  scrollbar-color: #9f7648 var(--paper-deep);
 }
 
 #card-dialog::backdrop { background: #251608a6; }
@@ -126,7 +185,7 @@ body:has(dialog[open]) { overflow: hidden; }
   place-content: center;
   border: 1px solid #a77743;
   border-radius: 50%;
-  background: #f9eccd;
+  background: var(--paper);
   color: var(--red);
   font: 700 1.8rem/1 var(--heading);
 }
@@ -179,7 +238,7 @@ h1 {
   padding: .3rem .4rem .6rem;
   border: 2px double #b38753;
   border-radius: 45% 45% .15rem .15rem / 30% 30% .15rem .15rem;
-  background: #f1deb5b3;
+  background: #eadbbeb3;
   color: var(--green);
 }
 
@@ -220,7 +279,7 @@ h1 {
   margin: 1.8rem auto 0;
   padding: 1.15rem clamp(.75rem, 5vw, 1.6rem);
   border: 3px double #ab8050;
-  background: #f8edcf;
+  background: var(--paper);
   text-align: left;
 }
 
@@ -243,7 +302,7 @@ h1 {
   padding: .45rem .6rem;
   border: 1px solid #9a8060;
   border-radius: .125rem;
-  background: #fff8e6;
+  background: var(--paper-light);
   color: var(--ink);
 }
 
