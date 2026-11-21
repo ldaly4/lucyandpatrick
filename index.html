@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&amp;family=Source+Sans+3:wght@400;600&amp;display=swap">
-  <link rel="stylesheet" href="styles.css?v=thank-you-card">
+  <link rel="stylesheet" href="styles.css?v=postal-postcard">
   <script src="script.js?v=sheet-connection" defer></script>
 </head>
 <body>
@@ -40,7 +40,7 @@
         <input type="hidden" name="type" value="letter">
         <div hidden><label>Leave blank <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
         <div class="postal-poster">
-          <img src="images/postal-form.jpeg" width="987" height="1080" alt="" loading="lazy">
+          <img src="images/postal-postcard.jpeg" width="1536" height="1024" alt="" loading="lazy">
           <div class="postal-field postal-name">
             <label for="letter-name"><span class="visually-hidden">Name(s)</span></label>
             <input id="letter-name" name="name" autocomplete="name" required maxlength="150" aria-describedby="letter-name-error">
@@ -49,7 +49,7 @@
             <label for="letter-address"><span class="visually-hidden">Full address</span></label>
             <textarea id="letter-address" name="full_address" autocomplete="street-address" required maxlength="800" aria-describedby="letter-address-error"></textarea>
           </div>
-          <button class="postal-submit" type="submit"><span class="visually-hidden">Send my details</span></button>
+          <button class="postal-submit" type="submit"><span class="visually-hidden">Submit</span></button>
         </div>
         <div class="postal-notices">
           <p id="letter-name-error" aria-live="polite"></p>

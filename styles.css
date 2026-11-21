@@ -234,8 +234,10 @@ button:disabled { cursor: wait; }
 body:has(dialog[open]) { overflow: hidden; }
 
 #card-dialog {
-  width: min(calc(100% - 1.25rem), 38rem);
-  width: min(calc(100% - 1.25rem), 38rem, calc((100dvh - 1.25rem) * .914));
+  --card-ratio: 1.5;
+  --card-max-width: 52rem;
+  width: min(calc(100% - 1.25rem), var(--card-max-width));
+  width: min(calc(100% - 1.25rem), var(--card-max-width), calc((100dvh - 1.25rem) * var(--card-ratio)));
   max-width: none;
   max-height: calc(100dvh - 1.25rem);
   padding: 0;
@@ -244,6 +246,11 @@ body:has(dialog[open]) { overflow: hidden; }
   color: var(--ink);
   box-shadow: 0 12px 50px #21170b45;
   scrollbar-color: #9f7648 var(--paper-deep);
+}
+
+#card-dialog:has(.thanks:not([hidden])) {
+  --card-ratio: .914;
+  --card-max-width: 38rem;
 }
 
 #card-dialog::backdrop { background: #251608a6; }
@@ -291,20 +298,20 @@ body:has(dialog[open]) { overflow: hidden; }
 
 .postal-field {
   position: absolute;
-  left: 21.2%;
-  right: 21%;
+  left: 36.5%;
+  right: 6.8%;
 }
 
-.postal-name { top: 48.65%; height: 5.05%; }
-.postal-address { top: 59.65%; height: 13.8%; right: 22%; }
+.postal-name { top: 33.4%; height: 8.5%; }
+.postal-address { top: 52%; height: 20.8%; }
 
 .postal-field label {
   position: absolute;
-  inset: -55% 0 0;
+  inset: -90% 0 0;
   cursor: text;
 }
 
-.postal-address label { top: -24%; }
+.postal-address label { top: -34%; }
 
 .postal-field input,
 .postal-field textarea {
@@ -329,8 +336,8 @@ body:has(dialog[open]) { overflow: hidden; }
 
 .postal-submit {
   position: absolute;
-  inset: 75.5% 28% auto 27.4%;
-  height: 9.8%;
+  inset: 78.35% 21.75% auto 48.35%;
+  height: 13.5%;
   border: 0;
   background: transparent;
 }
