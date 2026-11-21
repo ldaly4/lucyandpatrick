@@ -77,6 +77,38 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
+const snowToggle = document.querySelector(".snow-toggle");
+const snowfall = document.querySelector("#snowfall");
+
+snowToggle.addEventListener("click", () => {
+  const active = snowToggle.getAttribute("aria-pressed") === "false";
+  snowToggle.setAttribute("aria-pressed", String(active));
+  snowfall.hidden = !active;
+
+  if (!active) {
+    snowfall.replaceChildren();
+    return;
+  }
+
+  const flakes = document.createDocumentFragment();
+  const count = 34;
+  for (let index = 0; index < count; index++) {
+    const flake = document.createElement("span");
+    const fallTime = 12 + Math.random() * 12;
+    flake.className = "snowflake";
+    flake.style.setProperty("--flake-left", `${((index + Math.random()) / count) * 100}%`);
+    flake.style.setProperty("--rest-top", `${5 + Math.random() * 90}%`);
+    flake.style.setProperty("--flake-size", `${7 + Math.random() * 11}px`);
+    flake.style.setProperty("--flake-opacity", `${.4 + Math.random() * .5}`);
+    flake.style.setProperty("--flake-drift", `${Math.random() * 100 - 50}px`);
+    flake.style.setProperty("--flake-turn", `${Math.random() * 160 - 80}deg`);
+    flake.style.setProperty("--fall-time", `${fallTime}s`);
+    flake.style.setProperty("--fall-delay", `${-Math.random() * fallTime}s`);
+    flakes.append(flake);
+  }
+  snowfall.append(flakes);
+});
+
 const fire = document.querySelector(".fire");
 const stillFlame = fire.querySelector(".flame");
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
