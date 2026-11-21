@@ -1,7 +1,7 @@
 "use strict";
 
 // Google Apps Script web app URL. Paste the deployed /exec URL here.
-const APPS_SCRIPT_URL = "";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxIOXTn6BMidSpovzQyY2vtqtyYjajc4kv2My1hH0MYYSF2g5tIRuqnoQ0lAsDYYn5LWA/exec";
 const EXTRA_FLAME_FRAMES = ["images/flame-2.png", "images/flame-3.png"];
 
 const signUp = document.querySelector(".painting-link");

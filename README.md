@@ -23,7 +23,7 @@ The painting is the landing page. Select the framed invitation in the artwork to
 3. From the Sheet, open **Extensions → Apps Script**, replace the starter code with `apps-script.gs` and paste the Sheet ID into `SPREADSHEET_ID`. It’s the part of the Sheet URL between `/d/` and `/edit`.
 4. Choose **Deploy → New deployment → Web app**. Under **Execute as**, choose **Me**. Allow **Anyone**, including signed-out visitors, to access the web app. Authorise and deploy it. The web app accepts submissions while Sheet access stays restricted. [Google Apps Script web app guide](https://developers.google.com/apps-script/guides/web)
 5. Copy the URL ending in `/exec` into `APPS_SCRIPT_URL` at the top of `script.js`. If you subsequently edit the Apps Script, use **Deploy → Manage deployments** and update the deployment to a new version.
-6. Before sharing the site, use a signed-out browser to submit a test through each form and verify both rows directly in the Sheet. The browser sends a `FormData` POST using `no-cors`, which makes the response opaque. The acknowledgement means the request was sent, and the Sheet confirms whether it was saved. [MDN on opaque Fetch responses](https://developer.mozilla.org/en-US/docs/Web/API/Response/type)
+6. Before sharing the site, use a signed-out browser to submit a test through the postal form and verify the row directly in the Sheet. The browser sends a `FormData` POST using `no-cors`, which makes the response opaque. The acknowledgement means the request was sent, and the Sheet confirms whether it was saved. [MDN on opaque Fetch responses](https://developer.mozilla.org/en-US/docs/Web/API/Response/type)
 
 ## Deploy
 
