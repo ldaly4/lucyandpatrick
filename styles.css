@@ -150,6 +150,64 @@ button:disabled { cursor: wait; }
 
 .flame.is-lit { visibility: visible; }
 
+.candles { position: absolute; inset: 0; pointer-events: none; }
+
+.candle-flame {
+  position: absolute;
+  top: var(--wick-top);
+  left: var(--wick-left);
+  width: var(--flame-size, 1.12%);
+  height: auto;
+  translate: -50% -100%;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 0 4px #efa64288);
+}
+
+.candle-left-outer {
+  --wick-top: 23.6%;
+  --wick-left: 17.83%;
+  --flicker-delay: -.4s;
+  --flicker-duration: 2.1s;
+}
+
+.candle-left-inner {
+  --wick-top: 29.4%;
+  --wick-left: 24%;
+  --flame-size: 1%;
+  --flicker-delay: -1.45s;
+  --flicker-duration: 2.65s;
+}
+
+.candle-right-inner {
+  --wick-top: 28.95%;
+  --wick-left: 77.9%;
+  --flame-size: 1.03%;
+  --flicker-delay: -.92s;
+  --flicker-duration: 2s;
+}
+
+.candle-right-outer {
+  --wick-top: 22.8%;
+  --wick-left: 84%;
+  --flicker-delay: -2s;
+  --flicker-duration: 2.85s;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .candle-flame {
+    animation: candle-flicker var(--flicker-duration) ease-in-out var(--flicker-delay) infinite;
+  }
+
+  @keyframes candle-flicker {
+    0%, 100% { transform: rotate(-2deg) scale(1, 1.03); opacity: .97; }
+    17% { transform: rotate(3deg) scale(.96, .94); opacity: .89; }
+    36% { transform: rotate(-4deg) scale(1.05, 1.05); opacity: 1; }
+    49% { transform: rotate(1deg) scale(1, .97); opacity: .93; }
+    68% { transform: rotate(4deg) scale(.96, 1.04); opacity: .98; }
+    86% { transform: rotate(-1deg) scale(1.02, .93); opacity: .91; }
+  }
+}
+
 body:has(dialog[open]) { overflow: hidden; }
 
 #card-dialog {
