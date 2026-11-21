@@ -80,8 +80,7 @@ form.addEventListener("submit", async (event) => {
 const snowToggle = document.querySelector(".snow-toggle");
 const snowfall = document.querySelector("#snowfall");
 
-snowToggle.addEventListener("click", () => {
-  const active = snowToggle.getAttribute("aria-pressed") === "false";
+function setSnowfall(active) {
   snowToggle.setAttribute("aria-pressed", String(active));
   snowfall.hidden = !active;
 
@@ -107,6 +106,68 @@ snowToggle.addEventListener("click", () => {
     flakes.append(flake);
   }
   snowfall.append(flakes);
+}
+
+const motion = window.DeviceMotionEvent;
+const requiresMotionPermission = typeof motion?.requestPermission === "function";
+let requestedMotionPermission = false;
+let gravityEstimate;
+let aboveShakeThreshold = false;
+let lastShakePeak = -Infinity;
+
+function accelerationVector(reading) {
+  const axes = [reading?.x, reading?.y, reading?.z];
+  return axes.every(Number.isFinite) ? axes : null;
+}
+
+function shakeStrength(event) {
+  const linear = accelerationVector(event.acceleration);
+  if (linear) return Math.hypot(...linear);
+
+  const raw = accelerationVector(event.accelerationIncludingGravity);
+  if (!raw) return 0;
+
+  // Track slow changes in gravity to keep quick shakes detectable in any direction.
+  gravityEstimate ??= raw;
+  const delta = raw.map((value, axis) => value - gravityEstimate[axis]);
+  gravityEstimate = gravityEstimate.map((value, axis) => value + delta[axis] * .15);
+  return Math.hypot(...delta);
+}
+
+function onDeviceMotion(event) {
+  if (!snowfall.hidden || cardDialog.open || document.hidden) {
+    aboveShakeThreshold = false;
+    lastShakePeak = -Infinity;
+    gravityEstimate = undefined;
+    return;
+  }
+
+  const strength = shakeStrength(event);
+  if (strength < 7) aboveShakeThreshold = false;
+  if (strength < 12 || aboveShakeThreshold) return;
+  aboveShakeThreshold = true;
+
+  // Two distinct peaks distinguish a shake from a single bump.
+  const elapsed = event.timeStamp - lastShakePeak;
+  if (elapsed < 70) return;
+  lastShakePeak = event.timeStamp;
+  if (elapsed <= 750) setSnowfall(true);
+}
+
+if (motion && !requiresMotionPermission) window.addEventListener("devicemotion", onDeviceMotion);
+
+snowToggle.addEventListener("click", async () => {
+  setSnowfall(snowfall.hidden);
+  if (!requiresMotionPermission || requestedMotionPermission) return;
+  requestedMotionPermission = true;
+
+  try {
+    if (await motion.requestPermission() === "granted") {
+      window.addEventListener("devicemotion", onDeviceMotion);
+    }
+  } catch {
+    // The painted snowglobe still toggles snowfall without sensor access.
+  }
 });
 
 const fire = document.querySelector(".fire");
