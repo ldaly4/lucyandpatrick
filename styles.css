@@ -66,6 +66,14 @@ button:disabled { cursor: wait; }
 
 .room { width: 100%; height: auto; }
 
+/* Keep light images out of the document flow if this layout stylesheet fails to load. */
+.painting-lights[hidden] {
+  position: absolute;
+  inset: 0;
+  display: block !important;
+  pointer-events: none;
+}
+
 .garland-glow {
   --halo-size: 1.9% 1.425%;
   --halo-colors: #fff6cbcf 0%, #ffe48fa6 17%, #ffcb5263 37%, #ffbd391e 69%, transparent 100%;
