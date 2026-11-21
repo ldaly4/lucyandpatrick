@@ -347,10 +347,10 @@ body:has(dialog[open]) { overflow: hidden; }
 .postal-notices:has(> :not(:empty)) { padding: .65rem 1rem; }
 
 .thanks {
-  padding: 4rem 1.25rem 2rem;
-  color: var(--green);
-  font: 700 1.8rem/1.13 var(--heading);
-  text-align: center;
+  width: 100%;
+  height: auto;
 }
+
+.thanks:focus-visible { outline-offset: -3px; }
 
 noscript p { margin-top: .8rem; color: var(--paper); text-align: center; }
