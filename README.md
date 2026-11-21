@@ -1,11 +1,9 @@
 # Lucy & Patrick’s Christmas cards
 
-The painting is the landing page. Select the framed invitation in the artwork to open the illustrated postal sign-up. The e-card option is below it. The page uses plain HTML, CSS and JavaScript. Open `index.html` to preview it locally, or run `python3 -m http.server 8000` from this folder and visit `http://localhost:8000`.
+The painting is the landing page. Select the framed invitation in the artwork to open the illustrated postal sign-up. The page uses plain HTML, CSS and JavaScript. Open `index.html` to preview it locally, or run `python3 -m http.server 8000` from this folder and visit `http://localhost:8000`.
 
 ## Personalise the page
 
-- **Deadline** — Set `POSTED_CARD_DEADLINE` near the top of `script.js` using `YYYY-MM-DD`. The sample date is 10 December 2026.
-- **Personal links and events** — Update the two example URLs and the three placeholder events in the About us and Events sections of `index.html`.
 - **Fireplace** — `images/fireplace.jpeg` is Lucy’s supplied hand-painted artwork. The smaller `images/fireplace-small.jpeg` is a resized copy for narrow screens. If you replace the artwork, update both files and their dimensions in `index.html`. Adjust `.painting` if the aspect ratio changes and `.painting-link` to match the painted sign.
 - **Flames** — The three transparent `images/flame-*.png` files were made from a sheet of painted flame frames generated with ImageGen. They are ready to swap for your own artwork. Replace them using the same names. Keep every frame on an equally sized transparent canvas so the fire stays anchored. If the canvas ratio changes, update `.fire`’s `aspect-ratio` in `styles.css` and the first frame’s dimensions in `index.html`. Set `--flame-top`, `--flame-left` and `--flame-width` at the top of `styles.css` to align the fire. To add a fourth frame, put `flame-4.png` in `images/` and add its path to `EXTRA_FLAME_FRAMES` in `script.js`. People using reduced motion see the first frame.
 - **Candles** — The four wicks share the ImageGen-painted `images/candle-flame.png`. Set each `--wick-top` and `--wick-left` in `styles.css` to align its flame. Reduced-motion visitors see still flames.

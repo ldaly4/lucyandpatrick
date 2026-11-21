@@ -10,9 +10,6 @@
   --paper-light: #faf2e2;
   --paper-deep: #eadbbe;
   --ink: #30271d;
-  --muted: #665444;
-  --gold: #b08a50;
-  --line: #cfb583;
   --heading: "Cormorant Garamond", Georgia, serif;
   --body: "Source Sans 3", system-ui, sans-serif;
 }
@@ -27,8 +24,7 @@ body {
   font: 1.0625rem/1.5 var(--body);
 }
 
-h1, h2, p, ul { margin: 0; }
-h1, h2 { font-family: var(--heading); line-height: 1.01; font-weight: 700; }
+p { margin: 0; }
 img { display: block; max-width: 100%; }
 button, input, textarea { font: inherit; }
 button { cursor: pointer; }
@@ -198,15 +194,12 @@ body:has(dialog[open]) { overflow: hidden; }
 
 #card-dialog {
   width: min(calc(100% - 1.25rem), 38rem);
+  width: min(calc(100% - 1.25rem), 38rem, calc((100dvh - 1.25rem) * .914));
   max-width: none;
   max-height: calc(100dvh - 1.25rem);
   padding: 0;
-  border: 5px double #94602d;
-  background-color: var(--paper);
-  background-image:
-    radial-gradient(ellipse at center, var(--paper-light) 25%, transparent 100%),
-    repeating-linear-gradient(0deg, #98643416 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(90deg, #98643416 0 1px, var(--paper-deep) 1px 4px);
+  border: 0;
+  background: var(--paper);
   color: var(--ink);
   box-shadow: 0 12px 50px #21170b45;
   scrollbar-color: #9f7648 var(--paper-deep);
@@ -293,155 +286,30 @@ body:has(dialog[open]) { overflow: hidden; }
 .postal-field :focus-visible,
 .postal-field [aria-invalid="true"] { outline: 2px solid var(--red); outline-offset: 0; }
 
-.postal-poster .postal-submit {
+.postal-submit {
   position: absolute;
   inset: 75.5% 28% auto 27.4%;
   height: 9.8%;
-  min-height: 0;
   border: 0;
   background: transparent;
-  color: var(--paper);
 }
 
 .postal-submit:focus-visible { outline-offset: 1px; }
-.postal-poster .postal-submit:disabled { background: #f4ecdc33; }
+.postal-submit:disabled { background: #f4ecdc33; }
 
-.postal-notes { padding: .75rem 1rem 0; text-align: center; }
-.postal-notes .privacy { margin: .2rem 0 0; }
-
-.ornament {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: .65rem;
-  margin: 0 auto .8rem;
+.postal-notices {
   color: var(--red);
-}
-
-.ornament::before, .ornament::after {
-  width: 2.6rem;
-  border-top: 1px solid var(--gold);
-  content: "";
-}
-
-.deadline {
-  margin: .3rem auto 0;
-  font-size: .97rem;
-  color: var(--muted);
-}
-
-.deadline time { color: var(--red); font-weight: 600; }
-
-.card-panel {
-  max-width: 35rem;
-  margin: .45rem auto .85rem;
-  padding: 1.15rem clamp(.75rem, 5vw, 1.6rem);
-  border: 3px double #ab8050;
-  background: var(--paper);
-  text-align: left;
-}
-
-.card-panel h2 {
-  margin-bottom: 1.1rem;
-  color: var(--green);
-  font-size: 2rem;
-}
-
-.field { margin-bottom: .8rem; }
-.field label { display: block; margin-bottom: .25rem; font-weight: 600; }
-.required { color: var(--red); }
-.optional, .hint { color: var(--muted); font-size: .93rem; font-weight: 400; }
-.hint { margin-top: .25rem; }
-
-.field input, .field textarea {
-  display: block;
-  width: 100%;
-  min-height: 2.75rem;
-  padding: .45rem .6rem;
-  border: 1px solid #9a8060;
-  border-radius: .125rem;
-  background: var(--paper-light);
-  color: var(--ink);
-}
-
-.field textarea { resize: vertical; }
-.field [aria-invalid="true"] { border: 2px solid var(--red); }
-.field-error, .submit-status { color: var(--red); font-size: .95rem; }
-.field-error:not(:empty), .submit-status:not(:empty) { margin-top: .3rem; }
-
-.checkbox {
-  display: flex;
-  align-items: center;
-  gap: .55rem;
-  min-height: 2.75rem;
-  margin-bottom: .65rem;
-  width: fit-content;
-  cursor: pointer;
-}
-
-.checkbox input { width: 1.15rem; height: 1.15rem; margin: 0; accent-color: var(--green); }
-.privacy { margin-bottom: .75rem; color: var(--muted); font-size: .93rem; }
-
-.submit {
-  min-height: 2.75rem;
-  padding: .45rem .9rem;
-  border: 1px solid var(--green);
-  border-radius: .125rem;
-  background: var(--green);
-  color: var(--paper);
-  font-weight: 600;
-}
-
-#email-panel h2 { color: var(--red); }
-#email-panel .submit { border-color: var(--red); background: var(--red); }
-.submit:disabled { opacity: .72; }
-.thanks { font: 700 1.8rem/1.13 var(--heading); color: var(--green); }
-
-.more {
-  margin: .65rem 1rem;
+  font-size: .95rem;
   text-align: center;
 }
 
-.more summary {
-  width: fit-content;
-  min-height: 2.75rem;
-  margin-inline: auto;
-  padding: .45rem .35rem;
-  color: var(--red);
-  cursor: pointer;
-  font-weight: 600;
-}
+.postal-notices:has(> :not(:empty)) { padding: .65rem 1rem; }
 
-.details {
-  display: grid;
-  gap: .85rem;
-  margin: .5rem 0;
-  padding: .75rem .3rem;
-  border-top: 1px solid var(--line);
-  text-align: left;
-}
-
-.details h2 {
-  margin-bottom: .55rem;
-  font-size: 1.6rem;
+.thanks {
+  padding: 4rem 1.25rem 2rem;
   color: var(--green);
-}
-
-.details ul { padding: 0; list-style: none; }
-.personal-links a { display: inline-block; min-height: 2.75rem; padding-block: .4rem; color: var(--red); text-underline-offset: .18em; }
-.events li + li { margin-top: .45rem; }
-.events span { display: block; color: var(--muted); font-size: .95rem; }
-
-footer {
-  padding: .15rem 1rem .9rem;
-  color: var(--green);
+  font: 700 1.8rem/1.13 var(--heading);
   text-align: center;
 }
 
-footer .ornament { margin-bottom: .15rem; }
-footer p span { font: italic 600 1.65rem/1.2 var(--heading); }
 noscript p { margin-top: .8rem; color: var(--paper); text-align: center; }
-
-@media (min-width: 34rem) {
-  .details { grid-template-columns: 1fr 1.1fr; padding-inline: .8rem; }
-}
