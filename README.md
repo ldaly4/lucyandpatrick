@@ -1,6 +1,6 @@
 # Lucy & Patrick’s Christmas cards
 
-The painting is the landing page. Select the framed invitation in the artwork to open the post and email sign-up dialog. The page uses plain HTML, CSS and JavaScript. Open `index.html` to preview it locally, or run `python3 -m http.server 8000` from this folder and visit `http://localhost:8000`.
+The painting is the landing page. Select the framed invitation in the artwork to open the illustrated postal sign-up. The e-card option is below it. The page uses plain HTML, CSS and JavaScript. Open `index.html` to preview it locally, or run `python3 -m http.server 8000` from this folder and visit `http://localhost:8000`.
 
 ## Personalise the page
 
@@ -9,7 +9,7 @@ The painting is the landing page. Select the framed invitation in the artwork to
 - **Fireplace** — `images/fireplace.jpeg` is Lucy’s supplied hand-painted artwork. The smaller `images/fireplace-small.jpeg` is a resized copy for narrow screens. If you replace the artwork, update both files and their dimensions in `index.html`. Adjust `.card-frame` if the aspect ratio changes and `.painting-link` to match the painted sign.
 - **Ribbon and paper** — Replace `images/bow.png` with your transparent artwork or `images/paper-texture.png` with your tile. The installed bow was generated with ImageGen and the paper tile is an interim texture. The overlay in `styles.css` keeps the texture subtle.
 - **Flames** — The three transparent `images/flame-*.png` files were made from a sheet of painted flame frames generated with ImageGen. They are ready to swap for your own artwork. Replace them using the same names. Keep every frame on an equally sized transparent canvas so the fire stays anchored. If the canvas ratio changes, update `.fire`’s `aspect-ratio` in `styles.css` and the first frame’s dimensions in `index.html`. Set `--flame-top`, `--flame-left` and `--flame-width` at the top of `styles.css` to align the fire. To add a fourth frame, put `flame-4.png` in `images/` and add its path to `EXTRA_FLAME_FRAMES` in `script.js`. People using reduced motion see the first frame.
-- **Post boxes** — Replace the illustrated placeholders `images/postbox-letter.png` and `images/postbox-email.png` with your artwork using the same names. Update the image dimensions in `index.html` if the new aspect ratios differ.
+- **Postal form** — The supplied artwork is in `images/postal-form.jpeg`. The real fields and send button line up with the painted controls using the `.postal-*` rules in `styles.css`.
 
 ## Connect a private Google Sheet
 
@@ -19,6 +19,8 @@ The painting is the landing page. Select the framed invitation in the artwork to
    ```text
    timestamp	type	name	email	address1	address2	town	county	country	eircode	irish	note
    ```
+
+   The postal form stores the full multiline address in `address1`. Turn on text wrapping for that column to see each line.
 
 3. From the Sheet, open **Extensions → Apps Script**, replace the starter code with `apps-script.gs` and paste the Sheet ID into `SPREADSHEET_ID`. It’s the part of the Sheet URL between `/d/` and `/edit`.
 4. Choose **Deploy → New deployment → Web app**. Under **Execute as**, choose **Me**. Allow **Anyone**, including signed-out visitors, to access the web app. Authorise and deploy it. The web app accepts submissions while Sheet access stays restricted. [Google Apps Script web app guide](https://developers.google.com/apps-script/guides/web)

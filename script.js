@@ -19,27 +19,6 @@ deadline.textContent = new Intl.DateTimeFormat("en-IE", {
   timeZone: "UTC",
 }).format(new Date(POSTED_CARD_DEADLINE));
 
-const postboxes = [...document.querySelectorAll(".postbox")];
-
-for (const postbox of postboxes) {
-  postbox.addEventListener("click", () => {
-    const opening = postbox.getAttribute("aria-expanded") === "false";
-
-    for (const choice of postboxes) {
-      const open = choice === postbox && opening;
-      choice.setAttribute("aria-expanded", String(open));
-      const panel = document.getElementById(choice.getAttribute("aria-controls"));
-      panel.hidden = !open;
-      if (open) {
-        const target = panel.querySelector("form").hidden
-          ? panel.querySelector(".thanks")
-          : panel.querySelector("h2");
-        target.focus();
-      }
-    }
-  });
-}
-
 function validateField(input) {
   const error = document.getElementById(input.id + "-error");
   let message = "";
@@ -47,8 +26,7 @@ function validateField(input) {
   if (input.required && !input.value.trim()) {
     const requiredMessages = {
       name: "Please enter your name(s).",
-      address1: "Please enter the first line of your address.",
-      town: "Please enter your town or city.",
+      full_address: "Please enter your full postal address.",
       email: "Please enter your email address.",
     };
     message = requiredMessages[input.name];
@@ -62,8 +40,8 @@ function validateField(input) {
   return !message;
 }
 
-for (const form of document.querySelectorAll(".card-panel form")) {
-  const fields = [...form.querySelectorAll("input[required], input[type='email']")];
+for (const form of cardDialog.querySelectorAll("form")) {
+  const fields = [...form.querySelectorAll("[required], input[type='email']")];
   const button = form.querySelector(".submit");
   const status = form.querySelector(".submit-status");
   const thanks = form.parentElement.querySelector(".thanks");
@@ -108,7 +86,7 @@ for (const form of document.querySelectorAll(".card-panel form")) {
       form.reset();
       form.hidden = true;
       thanks.hidden = false;
-      if (!form.parentElement.hidden) thanks.focus();
+      if (cardDialog.open && thanks.getClientRects().length) thanks.focus();
     } catch {
       status.textContent = "We couldn’t send your request. Please try again.";
     } finally {

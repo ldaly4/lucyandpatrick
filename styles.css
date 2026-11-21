@@ -154,6 +154,7 @@ body:has(dialog[open]) { overflow: hidden; }
 
 #card-dialog {
   width: min(calc(100% - 1.25rem), 38rem);
+  max-width: none;
   max-height: calc(100dvh - 1.25rem);
   padding: 0;
   border: 5px double #94602d;
@@ -192,12 +193,77 @@ body:has(dialog[open]) { overflow: hidden; }
   font: 700 1.8rem/1 var(--heading);
 }
 
-.invitation {
-  margin: .55rem;
-  padding: 1.5rem .7rem 1.1rem;
-  border: 1px dashed #9d6e3f;
-  text-align: center;
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
+
+.postal-poster {
+  position: relative;
+  background: var(--paper-light);
+}
+
+.postal-poster img { width: 100%; height: auto; }
+
+.postal-field {
+  position: absolute;
+  left: 21.2%;
+  right: 21%;
+}
+
+.postal-name { top: 48.65%; height: 5.05%; }
+.postal-address { top: 59.65%; height: 13.8%; right: 22%; }
+
+.postal-field label {
+  position: absolute;
+  inset: -55% 0 0;
+  cursor: text;
+}
+
+.postal-address label { top: -24%; }
+
+.postal-field input,
+.postal-field textarea {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0 .35em;
+  border: 0;
+  border-radius: .2rem;
+  background: transparent;
+  color: var(--ink);
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  line-height: 1.1;
+  scroll-margin: 3.5rem 0;
+}
+
+.postal-name input { line-height: 1; }
+.postal-field textarea { padding-top: .23em; resize: none; }
+.postal-field :focus-visible,
+.postal-field [aria-invalid="true"] { outline: 2px solid var(--red); outline-offset: 0; }
+
+.postal-poster .postal-submit {
+  position: absolute;
+  inset: 75.5% 28% auto 27.4%;
+  height: 9.8%;
+  min-height: 0;
+  border: 0;
+  background: transparent;
+  color: var(--paper);
+}
+
+.postal-submit:focus-visible { outline-offset: 1px; }
+.postal-poster .postal-submit:disabled { background: #f4ecdc33; }
+
+.postal-notes { padding: .75rem 1rem 0; text-align: center; }
+.postal-notes .privacy { margin: .2rem 0 0; }
 
 .ornament {
   display: flex;
@@ -214,62 +280,8 @@ body:has(dialog[open]) { overflow: hidden; }
   content: "";
 }
 
-h1 {
-  font-size: clamp(2.25rem, 8vw, 3.25rem);
-  letter-spacing: -.025em;
-  color: var(--red);
-}
-
-.intro {
-  margin: .65rem auto .8rem;
-  color: var(--muted);
-}
-
-.postboxes {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: .8rem;
-  max-width: 21rem;
-  margin-inline: auto;
-}
-
-.postbox {
-  display: grid;
-  justify-items: center;
-  align-content: start;
-  padding: .3rem .4rem .6rem;
-  border: 2px double #b38753;
-  border-radius: 45% 45% .15rem .15rem / 30% 30% .15rem .15rem;
-  background: #eadbbeb3;
-  color: var(--green);
-}
-
-.postbox-email { color: var(--red); }
-
-.postbox[aria-expanded="true"] {
-  border-color: currentColor;
-  box-shadow: inset 0 0 0 1px currentColor;
-}
-
-.postbox img {
-  width: min(100%, 5.4rem);
-  height: auto;
-  margin-bottom: .2rem;
-}
-
-.postbox-label {
-  font-family: var(--heading);
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: .13em;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.postbox-detail { margin-top: .15rem; color: var(--muted); font-size: .95rem; }
-
 .deadline {
-  margin: .95rem auto 0;
+  margin: .3rem auto 0;
   font-size: .97rem;
   color: var(--muted);
 }
@@ -278,7 +290,7 @@ h1 {
 
 .card-panel {
   max-width: 35rem;
-  margin: 1.8rem auto 0;
+  margin: .45rem auto .85rem;
   padding: 1.15rem clamp(.75rem, 5vw, 1.6rem);
   border: 3px double #ab8050;
   background: var(--paper);
@@ -387,8 +399,5 @@ footer p span { font: italic 600 1.65rem/1.2 var(--heading); }
 noscript p { margin-top: .8rem; text-align: center; }
 
 @media (min-width: 34rem) {
-  .small-break { display: none; }
-  .invitation { padding: 1.8rem 1rem 1.2rem; }
-  .field-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
   .details { grid-template-columns: 1fr 1.1fr; padding-inline: .8rem; }
 }

@@ -14,10 +14,11 @@ function doPost(e) {
   const name = read("name", 150);
   const email = read("email", 254);
   const byPost = type === "letter";
+  const fullAddress = byPost ? read("full_address", 800) : "";
   const address1 = byPost ? read("address1", 180) : "";
   const town = byPost ? read("town", 100) : "";
 
-  if (!name || (byPost && (!address1 || !town)) || (!byPost && !email)) {
+  if (!name || (byPost && !fullAddress && (!address1 || !town)) || (!byPost && !email)) {
     return result("Missing required fields");
   }
   if (email && !/^[^\s@]+@[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)*$/i.test(email)) {
@@ -32,11 +33,11 @@ function doPost(e) {
     type,
     asText(name),
     asText(email),
-    asText(address1),
+    asText(fullAddress || address1),
     asText(byPost ? read("address2", 180) : ""),
     asText(town),
     asText(byPost ? read("county", 100) : ""),
-    asText(byPost ? read("country", 100) || "Ireland" : ""),
+    asText(byPost && !fullAddress ? read("country", 100) || "Ireland" : ""),
     asText(byPost ? read("eircode", 30) : ""),
     fields.irish === "yes" ? "Yes" : "No",
     asText(read("note", 500)),
