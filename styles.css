@@ -288,10 +288,8 @@ button:disabled { cursor: wait; }
 body:has(dialog[open]) { overflow: hidden; }
 
 #card-dialog {
-  --card-ratio: 1.5;
-  --card-max-width: 52rem;
-  width: min(calc(100% - 1.25rem), var(--card-max-width));
-  width: min(calc(100% - 1.25rem), var(--card-max-width), calc((100dvh - 1.25rem) * var(--card-ratio)));
+  width: min(calc(100% - 1.25rem), 52rem);
+  width: min(calc(100% - 1.25rem), 52rem, calc((100dvh - 1.25rem) * 1.5));
   max-width: none;
   max-height: calc(100dvh - 1.25rem);
   padding: 0;
@@ -300,11 +298,6 @@ body:has(dialog[open]) { overflow: hidden; }
   color: var(--ink);
   box-shadow: 0 12px 50px #21170b45;
   scrollbar-color: #9f7648 var(--paper-deep);
-}
-
-#card-dialog:has(.thanks:not([hidden])) {
-  --card-ratio: .914;
-  --card-max-width: 38rem;
 }
 
 #card-dialog::backdrop { background: #251608a6; }
@@ -352,12 +345,12 @@ body:has(dialog[open]) { overflow: hidden; }
 
 .postal-field {
   position: absolute;
-  left: 36.5%;
-  right: 6.8%;
+  left: 35.8%;
+  right: 7.8%;
 }
 
-.postal-name { top: 33.4%; height: 8.5%; }
-.postal-address { top: 52%; height: 20.8%; }
+.postal-name { top: 29%; height: 8.3%; }
+.postal-address { top: 48%; height: 20.1%; }
 
 .postal-field label {
   position: absolute;
@@ -377,21 +370,22 @@ body:has(dialog[open]) { overflow: hidden; }
   border: 0;
   border-radius: .2rem;
   background: transparent;
-  color: var(--ink);
+  color: var(--paper-light);
+  caret-color: var(--paper-light);
   font-size: clamp(1rem, 3vw, 1.2rem);
   line-height: 1.1;
   scroll-margin: 3.5rem 0;
 }
 
 .postal-name input { line-height: 1; }
-.postal-field textarea { padding-top: .23em; resize: none; }
-.postal-field :focus-visible,
-.postal-field [aria-invalid="true"] { outline: 2px solid var(--red); outline-offset: 0; }
+.postal-field textarea { padding-top: .1em; line-height: 1; resize: none; }
+.postal-field :focus-visible { outline: 2px solid var(--paper-light); outline-offset: -2px; }
+.postal-field [aria-invalid="true"] { outline: 2px solid var(--red); outline-offset: 2px; }
 
 .postal-submit {
   position: absolute;
-  inset: 78.35% 21.75% auto 48.35%;
-  height: 13.5%;
+  inset: 72.55% 21% auto 45.7%;
+  height: 17.95%;
   border: 0;
   background: transparent;
 }
