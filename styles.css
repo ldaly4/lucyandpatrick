@@ -343,6 +343,42 @@ body:has(dialog[open]) { overflow: hidden; }
 
 .postal-poster img { width: 100%; height: auto; }
 
+.postcard-tree-lights {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.tree-light {
+  position: absolute;
+  top: var(--light-y);
+  left: var(--light-x);
+  width: 3.4%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  background: radial-gradient(circle, #fff8d9 0%, var(--light-color, #ffc85d) 19%, transparent 69%);
+  opacity: .55;
+}
+
+.tree-light-star {
+  width: 8%;
+  background: radial-gradient(circle, #fff9db 0%, #ffe58c 14%, #ffb93778 38%, transparent 72%);
+  opacity: .7;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tree-light {
+    animation: tree-twinkle var(--light-time, 3.5s) ease-in-out var(--light-delay, 0s) infinite;
+  }
+
+  @keyframes tree-twinkle {
+    0%, 100% { opacity: .28; scale: .86; }
+    35% { opacity: .93; scale: 1.08; }
+    65% { opacity: .51; scale: .99; }
+  }
+}
+
 .postal-field {
   position: absolute;
   left: 35.8%;
