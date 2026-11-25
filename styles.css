@@ -361,6 +361,12 @@ body:has(dialog[open]) { overflow: hidden; }
   opacity: .55;
 }
 
+.tree-light-pin {
+  width: 1.8%;
+  background: radial-gradient(circle, #fff3bdd9 0%, #ffc45999 23%, transparent 68%);
+  opacity: .5;
+}
+
 .tree-light-star {
   width: 8%;
   background: radial-gradient(circle, #fff9db 0%, #ffe58c 14%, #ffb93778 38%, transparent 72%);
